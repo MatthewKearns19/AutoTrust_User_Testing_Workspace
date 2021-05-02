@@ -1,27 +1,41 @@
+import os
+
 from behave import *
-from functions.webdriver_functions import find_element_by_xpath
+from functions.main_functions_flow import find_element_by_xpath, screenshot
+from image_classifiers.python_image_classifier_binary import compare_images
 from variables.browser_elements import welcome_element
-from functions.home_page_fuctions import execute_homepage_navigation
-
-# from functions.webdriver_functions import screenshot
-
+from functions.main_functions_flow import execute_homepage_navigation
+import time
 
 use_step_matcher("re")
 
 
-# This defines the use action from our feature file, and then passing this captured data to our functions directory
+# This defines the step outlined from our feature file
+
 @when("The user navigates to the (?P<homepage_url>.+)")
 def homepage_navigation(context, homepage_url):
     execute_homepage_navigation(context, homepage_url)
+    time.sleep(2)
 
 
-@then("Then the user can see the (?P<welcome_text>.+)")
+@then("the user can see the (?P<welcome_text>.+)")
 def locate_welcome_text(context, welcome_text):
-    # must be .text
-    xpath_found_output = find_element_by_xpath(context, welcome_element).text
-    assert xpath_found_output == welcome_text
+    element_found_by_xpath = find_element_by_xpath(context, welcome_element)
+    time.sleep(3)
+    text_found = element_found_by_xpath.text
+    print(text_found)
+    assert text_found == welcome_text
 
-    """ when an element is found, we then need to call our npm package, to screenshot the current browser state 
-        and store it in our /data/test_screenshot_outputs directory. After this is captured, we want to retrieve 
-        this image and run our node.js npm package command to retrieve a ui interpretation result 
+
+@step("the user visually compares the (?P<screenshotted_page>.+)")
+def compare_chosen_image(context, screenshotted_page):
+    """ when an element is found, we then need to call our npm package, to screenshot the current browser state
+        and store it in our /screenshots/browser_screenshot_outputs directory. After this is captured, we want to retrieve
+        this image and run our node.js npm package command to retrieve a ui interpretation result
         e.g compare(Homepage1, Homepage2)"""
+
+    page_name = screenshotted_page
+
+    screenshot(context, page_name)
+    time.sleep(3)
+    compare_images(context, page_name)

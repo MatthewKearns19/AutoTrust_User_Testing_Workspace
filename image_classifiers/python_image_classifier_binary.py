@@ -27,6 +27,10 @@ def compare_images(context, page_name):
 	# passing the two grayscale images into compare_ssim to find the
 	# Structural Similarity Index (SSIM)
 	(ssim_score, diff) = compare_ssim(image1_grayscale, image2_grayscale, full=True)
+
+	# diff is represented as a floating point data type in the range [0,1]
+	# as it was returned from compare_ssim, so we must convert the array to
+	# 8-bit unsigned integers in the range [0,255] before we can use it with cv2
 	image_diff = (diff * 255).astype("uint8")
 	print("Similarity score: {}".format(ssim_score))
 
@@ -39,11 +43,13 @@ def compare_images(context, page_name):
 	contours = imutils.grab_contours(contours)
 
 	for contour in contours:
-		# compute the bounding box of the contour
-		(x, y, w, h) = cv2.boundingRect(contour)
-		# now drawing the bounding box to highlight the difference area
-		cv2.rectangle(image1, (x, y), (x + w, y + h), (0, 0, 255), 2)
-		cv2.rectangle(image2, (x, y), (x + w, y + h), (0, 0, 255), 2)
+		area = cv2.contourArea(contour)
+		if area > 10:
+			# compute the bounding box of the contour
+			(x, y, w, h) = cv2.boundingRect(contour)
+			# now drawing the bounding box to highlight the difference area
+			cv2.rectangle(image1, (x, y), (x + w, y + h), (0, 0, 255), 2)
+			cv2.rectangle(image2, (x, y), (x + w, y + h), (0, 0, 255), 2)
 
 	# cv2.imshow("Modified", image2)
 	# save the image

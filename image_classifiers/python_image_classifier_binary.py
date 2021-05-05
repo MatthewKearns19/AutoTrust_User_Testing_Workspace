@@ -4,6 +4,7 @@
 import os
 import cv2
 from skimage.measure import compare_ssim
+#from skimage.metric import compare_ssim
 import imutils
 import shutil
 
@@ -26,6 +27,7 @@ def compare_images(context, page_name):
 
 	# passing the two grayscale images into compare_ssim to find the
 	# Structural Similarity Index (SSIM)
+	# use structural_similarity instead of compare_ssim for skimage==0.18.1
 	(ssim_score, diff) = compare_ssim(image1_grayscale, image2_grayscale, full=True)
 
 	# diff is represented as a floating point data type in the range [0,1]

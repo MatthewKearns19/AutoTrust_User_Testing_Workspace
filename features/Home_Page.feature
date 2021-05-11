@@ -8,4 +8,4 @@ Feature:Home page navigation feature
     Examples:
     #This is calling our netlify hosted url
     | homepage_url                               | welcome_text                                                                | screenshotted_page |
-    | https://userworkspaceexample.netlify.app/  | Welcome to AutoTrust, the home of all your automated visual testing desires.| homepage           |
+    | https://auto-trust-user-workspace-staging-demo.netlify.app/  | Welcome to AutoTrust, the home of all your automated visual testing desires.| homepage           |

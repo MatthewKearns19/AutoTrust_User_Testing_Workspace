@@ -2,7 +2,7 @@ import os
 
 from behave import *
 from functions.main_functions_flow import find_element_by_xpath, screenshot
-from image_classifiers.python_image_classifier_binary import compare_images
+from image_classifiers.python_image_classifier_binary import compare_page_location_similarity
 from variables.browser_elements import welcome_element
 from functions.main_functions_flow import execute_homepage_navigation
 import time
@@ -38,4 +38,4 @@ def compare_chosen_image(context, screenshotted_page):
 
     screenshot(context, page_name)
     time.sleep(3)
-    compare_images(context, page_name)
+    compare_page_location_similarity(context, page_name)

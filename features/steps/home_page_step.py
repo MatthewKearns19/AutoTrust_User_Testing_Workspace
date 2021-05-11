@@ -2,7 +2,7 @@ import os
 
 from behave import *
 from functions.main_functions_flow import find_element_by_xpath, screenshot
-from image_classifiers.python_image_classifier_binary import compare_page_location_similarity
+from image_classifiers.binary_site_location_classifier import compare_page_location_similarity
 from variables.browser_elements import welcome_element
 from functions.main_functions_flow import execute_homepage_navigation
 import time

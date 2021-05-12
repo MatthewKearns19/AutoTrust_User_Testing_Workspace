@@ -8,6 +8,7 @@ from skimage.metrics import structural_similarity
 import imutils
 import time
 
+from image_classifiers.image_distortion_classifier import classify_image_quality
 from variables.app_variables import screenshot_results_path, png_file_extension, \
 	failed_comparisons_path, pre_defined_screenshot_path, failed_file_extension
 
@@ -59,3 +60,6 @@ def compare_page_location_similarity(context, image_name):
 		# save the image
 		failed_image_path = os.path.join(failed_comparisons_path, image_name + failed_file_extension)
 		cv2.imwrite(failed_image_path, image2)
+
+		# assess the image that was screenshotted from the browser
+		classify_image_quality(screenshotted_image, image_name)

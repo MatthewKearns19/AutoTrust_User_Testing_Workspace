@@ -13,8 +13,21 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.applications.vgg16 import preprocess_input
 from sklearn.metrics import confusion_matrix
 
-from variables.app_variables import image_quality_distortion_model_path, confusion_matrix_assessment_path, \
-    png_file_extension, confusion_matrix_output_path, matrix_extension
+# from variables.app_variables import image_quality_distortion_model_path, \
+#     confusion_matrix_assessment_path, png_file_extension, \
+#     confusion_matrix_output_path, matrix_extension
+chrome_executable_path = 'C:/webdrivers/chromedriver.exe'
+pre_defined_screenshot_path = './screenshots/pre_defined_screenshots/'
+screenshot_results_path = './screenshots/browser_screenshot_outputs/'
+failed_comparisons_path = './screenshots/failed_comparisons/'
+failed_file_extension = "_failed_comparison.png"
+png_file_extension = ".png"
+image_quality_distortion_model_path = './models/Sequential_Image_Distortion_Classifier.h5'
+confusion_matrix_assessment_path = './confusion_matrix_assessment/model_classes/'
+assessment_high_resolution_assessment_path = './confusion_matrix_assessment/model_classes/high_resolution/'
+confusion_matrix_output_path = './confusion_matrix_assessment/confusion_matrix_output/'
+matrix_extension = '_confusion_matrix.png'
+
 
 # loading the Image Quality Classifier
 model = load_model(image_quality_distortion_model_path)
@@ -71,6 +84,7 @@ def create_confusion_matrix(image_name):
 # called from our test script functions
 def classify_image_quality(screenshotted_image_path, image_name):
     image_path = screenshotted_image_path
+    # load image as RBG with defined dimensions for model
     loaded_image = load_img(image_path, target_size=(224, 224))
 
     img_array = im.img_to_array(loaded_image)
@@ -98,12 +112,17 @@ def classify_image_quality(screenshotted_image_path, image_name):
     if final_prediction == 'high resolution':
 
         # write image to the high resolution folder to be assessed in a confusion matrix
-        new_image_path_for_confusion_matrix = os.path.join(confusion_matrix_assessment_path,
+        new_image_path_for_confusion_matrix = os.path.join(assessment_high_resolution_assessment_path,
                                                            image_name + png_file_extension)
-        cv2.imwrite(new_image_path_for_confusion_matrix, loaded_image)
+
+        image_to_store_in_high_res_folder = cv2.imread(screenshotted_image_path)
+        cv2.imwrite(new_image_path_for_confusion_matrix, image_to_store_in_high_res_folder)
         create_confusion_matrix(image_name)
 
         assert final_prediction == 'high resolution', \
             "The captured image labeled '{}' in your pre-defined images has failed " \
             "image quality assessment for distortion. Distortion of type '{}' was " \
             "classified instead of 'high resolution'".format(image_name, final_prediction)
+
+
+classify_image_quality('./screenshots/pre_defined_screenshots/homepage.png', 'homepage')

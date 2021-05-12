@@ -27,14 +27,14 @@ def classify_image(image_path):
     for i in feature_prediction:
 
         if [i][0][0] > 0.95:
-            print("image contains blur distortion.")
+            print("image features are classified blur distortion.")
         if [i][0][1] > 0.95:
-            print("image contains color distortion")
+            print("image features are classified color distortion")
         if [i][0][2] > 0.95:
-            print("image contains JPEG compression")
+            print("image features are classified JPEG compression")
         if [i][0][3] > 0.95:
-            print("image is high resolution")
+            print("image features are classified as high resolution")
         if [i][0][4] > 0.95:
-            print("image contains noise")
+            print("image features are classified as noise distortion")
         if [i][0][5] > 0.95:
-            print("image contains spatial distortion")
+            print("image features are classified as spatial distortion")

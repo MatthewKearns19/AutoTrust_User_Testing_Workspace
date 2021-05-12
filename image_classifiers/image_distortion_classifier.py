@@ -109,7 +109,7 @@ def classify_image_quality(screenshotted_image_path, image_name):
         final_prediction = classes[max_prediction_location]
         print('image features are classified as {}'.format(final_prediction))
 
-    if final_prediction == 'high resolution':
+    if final_prediction != 'high resolution':
 
         # write image to the high resolution folder to be assessed in a confusion matrix
         new_image_path_for_confusion_matrix = os.path.join(assessment_high_resolution_assessment_path,
@@ -119,7 +119,7 @@ def classify_image_quality(screenshotted_image_path, image_name):
         cv2.imwrite(new_image_path_for_confusion_matrix, image_to_store_in_high_res_folder)
         create_confusion_matrix(image_name)
 
-        assert final_prediction == 'high resolution', \
+        assert final_prediction != 'high resolution', \
             "The captured image labeled '{}' in your pre-defined images has failed " \
             "image quality assessment for distortion. Distortion of type '{}' was " \
             "classified instead of 'high resolution'".format(image_name, final_prediction)

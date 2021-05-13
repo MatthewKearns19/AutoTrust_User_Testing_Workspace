@@ -18,13 +18,13 @@ def homepage_navigation(context, homepage_url):
     time.sleep(2)
 
 
-@then("the user can see the (?P<welcome_text>.+)")
-def locate_welcome_text(context, welcome_text):
+@then("the user can see the (?P<heading_text>.+)")
+def locate_welcome_text(context, heading_text):
     element_found_by_xpath = find_element_by_xpath(context, welcome_element)
     time.sleep(3)
     text_found = element_found_by_xpath.text
     print(text_found)
-    assert text_found == welcome_text
+    assert text_found == heading_text
 
 
 @step("the user visually compares the (?P<screenshotted_page>.+)")

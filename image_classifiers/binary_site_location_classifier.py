@@ -14,6 +14,7 @@ from variables.app_variables import screenshot_results_path, png_file_extension,
 
 
 def compare_page_location_similarity(context, image_name):
+	test_failed = False
 
 	# temporarily using a distorted pre-defined screenshot to compare against the captured
 	# screenshot, as the browser currently displays a non-distorted (true) image.
@@ -36,6 +37,7 @@ def compare_page_location_similarity(context, image_name):
 
 	# if the similarity ratio is less that 1:1
 	if ssim_score < 1.0:
+		test_failed = True
 		# diff is represented as a floating point data type in the range [0,1]
 		# as it was returned from compare_ssim, so we must convert the array to
 		# 8-bit unsigned integers in the range [0,255] before we can use it with cv2
@@ -61,5 +63,12 @@ def compare_page_location_similarity(context, image_name):
 		failed_image_path = os.path.join(failed_comparisons_path, image_name + failed_file_extension)
 		cv2.imwrite(failed_image_path, image2)
 
+	if test_failed:
+		# fail the test
+		assert ssim_score != 1.0, \
+			"The captured image labeled '{}' in your pre-defined images has failed " \
+			"image quality assessment. The binary grayscale image pixels do not match," \
+			"an element on your site must not be visible.'".format(image_name)
+
 		# assess the image that was screenshotted from the browser
-		classify_image_quality(screenshotted_image, image_name)
+		#classify_image_quality(screenshotted_image, image_name)

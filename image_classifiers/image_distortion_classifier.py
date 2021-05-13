@@ -125,4 +125,4 @@ def classify_image_quality(screenshotted_image_path, image_name):
             "classified instead of 'high resolution'".format(image_name, final_prediction)
 
 
-classify_image_quality('./screenshots/pre_defined_screenshots/homepage.png', 'homepage')
+

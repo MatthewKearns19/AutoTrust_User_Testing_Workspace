@@ -10,7 +10,6 @@ def find_element_by_xpath(context, element):
     try:
         found_element_value = WebDriverWait(context.browser, 10)\
             .until(lambda browser: getattr(browser, by_xpath)(element))
-        #context.exe = None
         return found_element_value
     except Exception as e:
         #context.exe = e

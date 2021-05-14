@@ -3,6 +3,7 @@ import os
 from behave import *
 from functions.main_functions_flow import find_element_by_xpath, screenshot
 from image_classifiers.binary_site_location_classifier import compare_page_location_similarity
+from image_classifiers.image_distortion_classifier import assess_and_classify_image_quality
 from variables.browser_elements import welcome_element
 from functions.main_functions_flow import execute_homepage_navigation
 import time
@@ -27,15 +28,24 @@ def locate_welcome_text(context, heading_text):
     assert text_found == heading_text
 
 
-@step("the user visually compares the (?P<screenshotted_page>.+)")
-def compare_chosen_image(context, screenshotted_page):
+@step("the user visually compares the (?P<screenshotted_page_location>.+)")
+def compare_chosen_image(context, screenshotted_page_location):
     """ when an element is found, we then need to call our npm package, to screenshot the current browser state
         and store it in our /screenshots/browser_screenshot_outputs directory. After this is captured, we want to retrieve
         this image and run our node.js npm package command to retrieve a ui interpretation result
         e.g compare(Homepage1, Homepage2)"""
 
-    page_name = screenshotted_page
+    page_name = screenshotted_page_location
 
     screenshot(context, page_name)
     time.sleep(3)
     compare_page_location_similarity(context, page_name)
+
+
+@step("the the location contains an image so assess the image quality (?P<screenshotted_page_location>.+)")
+def assess_chosen_page_location_image_quality(context, screenshotted_page_location):
+    page_name = screenshotted_page_location
+
+    screenshot(context, page_name)
+    time.sleep(3)
+    assess_and_classify_image_quality(context, page_name)

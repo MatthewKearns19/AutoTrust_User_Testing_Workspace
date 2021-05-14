@@ -67,7 +67,6 @@ def create_confusion_matrix(image_name):
     assessment_predictions = model.predict(x=test_batches, steps=len(test_batches), verbose=0)
 
     cm = confusion_matrix(y_true=test_batches.classes, y_pred=np.argmax(assessment_predictions, axis=-1))
-    #print(cm)
 
     matrix_title = "Distortion Classifier Confusion Matrix Assessment for '{}'".format(image_name)
     plot_labels = ['blur', 'color', 'compression', 'high res', 'noise', 'spatial']

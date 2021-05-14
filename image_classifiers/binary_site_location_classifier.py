@@ -18,7 +18,6 @@ def compare_page_location_similarity(context, image_name):
 
 	# temporarily using a distorted pre-defined screenshot to compare against the captured
 	# screenshot, as the browser currently displays a non-distorted (true) image.
-	#pre_defined_screenshot = "screenshots/pre_defined_screenshots/homepage2.png"
 	pre_defined_screenshot = os.path.join(pre_defined_screenshot_path, image_name + png_file_extension)
 	image1 = cv2.imread(pre_defined_screenshot)
 	screenshotted_image = os.path.join(screenshot_results_path, image_name + png_file_extension)
@@ -33,8 +32,8 @@ def compare_page_location_similarity(context, image_name):
 	# use structural_similarity instead of compare_ssim for skimage==0.18.1
 	(ssim_score, diff) = structural_similarity(image1_grayscale, image2_grayscale, full=True)
 	ssim_score_percentage = ssim_score * 1
-	print("Browser element comparison Similarity "
-		  "Score: {}% image accuracy. Similarity score is not 100%.".format(ssim_score_percentage))
+	print("Browser element comparison Similarity Score: {}% image accuracy. "
+		  "Similarity score is not 100%.".format(ssim_score_percentage))
 
 	# if the similarity ratio is less that 1:1
 	if ssim_score < 1.0:
@@ -52,7 +51,7 @@ def compare_page_location_similarity(context, image_name):
 
 		for contour in contours:
 			area = cv2.contourArea(contour)
-			if area > 100:
+			if area > 20:
 				# compute the bounding box of the contour
 				(x, y, w, h) = cv2.boundingRect(contour)
 				# now drawing the bounding box to highlight the difference area,
@@ -65,13 +64,13 @@ def compare_page_location_similarity(context, image_name):
 		cv2.imwrite(failed_image_path, image2)
 		time.sleep(1)
 
-	# if test_failed:
+	if test_failed:
 		failed_comparison_to_artifacts_path = artifacts_path + image_name + failed_file_extension
 		print('For CI/DC server integration, saving page element comparison at the location: ' + failed_comparison_to_artifacts_path)
 		cv2.imwrite(failed_comparison_to_artifacts_path, image2)
 		time.sleep(1)
-		# # fail the current test
-		# assert ssim_score == 1.0, \
-		# 	"The captured image labeled '{}' in your pre-defined images has failed " \
-		# 	"image quality assessment. The binary image pixels do not match," \
-		# 	"an element on your site must not be visible.'".format(image_name)
+		# fail the current test
+		assert ssim_score == 1.0, \
+			"The captured image labeled '{}' in your pre-defined images has failed " \
+			"image quality assessment. The binary image pixels do not match," \
+			"an element on your site must not be visible.'".format(image_name)

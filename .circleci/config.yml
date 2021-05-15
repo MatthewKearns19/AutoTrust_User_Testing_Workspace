@@ -28,11 +28,12 @@ jobs:
       - restore_cache:
           key: -v3-requirements-{{ checksum "requirements.txt" }}
       - run: pip install -r requirements.txt
-      - run: behave
       - save_cache:
           key: -v3-requirements-{{ checksum "requirements.txt" }}
           paths:
             - "env"
+      - run: behave
+
       - store_artifacts:
           path: root/AutoTrust_User_Testing_Workspace/artifacts
           destination: artifact-file

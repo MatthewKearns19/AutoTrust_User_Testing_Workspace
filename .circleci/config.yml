@@ -21,13 +21,14 @@ jobs:
       - run: sudo apt-get update ; sudo apt-get install fonts-liberation libasound2 libatk-bridge2.0-0 libatk1.0-0 libatspi2.0-0 libcairo2 libcups2 libgbm1 libgtk-3-0 libpango-1.0-0 libxkbcommon0 xdg-utils
       - run: sudo dpkg -i google-chrome.deb
       - run: sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
-      
+
       - run: python3 -m venv env
       - run: . env/bin/activate
       - run: python3 -m pip install --upgrade pip
       - restore_cache:
           key: -v3-requirements-{{ checksum "requirements.txt" }}
       - run: pip install -r requirements.txt
+      - run: behave
       - save_cache:
           key: -v3-requirements-{{ checksum "requirements.txt" }}
           paths:

@@ -18,6 +18,7 @@ jobs:
     steps:
       - checkout
       - run: curl -L -o google-chrome.deb https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo apt-get update ; sudo apt-get install libgconf2-4 libnss3-1d libxss1
       - run: sudo dpkg -i google-chrome.deb
       - run: sudo sed -i 's|HERE/chrome\"|HERE/chrome\" --disable-setuid-sandbox|g' /opt/google/chrome/google-chrome
       - run:

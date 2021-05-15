@@ -24,11 +24,10 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo dpkg -i google-chrome.deb
-          command: |
-            python3 -m venv env
-            . env/bin/activate
-            python3 -m pip install --upgrade pip
+
+      - run: python3 -m venv env
+      - run: . env/bin/activate
+      - run: python3 -m pip install --upgrade pip
       - restore_cache:
           key: -v3-requirements-{{ checksum "requirements.txt" }}
       - run: pip install -r requirements.txt

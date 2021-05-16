@@ -32,7 +32,7 @@ jobs:
           key: -v3-requirements-{{ checksum "requirements.txt" }}
           paths:
             - "env"
-      - run: python3 image_classifiers/image_distortion_classifer.py
+      - run: python3 image_classifiers/image_distortion_classifier.py
 
       - store_artifacts:
           path: root/AutoTrust_User_Testing_Workspace/artifacts

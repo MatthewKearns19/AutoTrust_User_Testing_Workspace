@@ -1,7 +1,7 @@
 #chrome path for local testing
 #chrome_executable_path = 'C:/webdrivers/chromedriver.exe'
 # chrome path for for circle-ci
-chrome_executable_path = './usr/local/bin/chromedriver.exech'
+chrome_executable_path = '/usr/local/bin/chromedriver.exech'
 pre_defined_screenshot_path = './screenshots/pre_defined_screenshots/'
 screenshot_results_path = './screenshots/browser_screenshot_outputs/'
 failed_comparisons_path = './screenshots/failed_comparisons/'

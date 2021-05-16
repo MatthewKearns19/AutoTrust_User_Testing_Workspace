@@ -13,7 +13,7 @@ def before_all(context):
     # context.browser = webdriver.Chrome(chrome_executable_path, port=9515, options=options,
     #                                    keep_alive=False)
 
-    context.browser = webdriver.Chrome(chrome_executable_path, options=options)
+    context.browser = webdriver.Chrome(executable_path=chrome_executable_path, options=options)
 
     context.browser.implicitly_wait(10)
     #context.browser.set_window_size(1920, 1080, context.browser.window_handles[0])

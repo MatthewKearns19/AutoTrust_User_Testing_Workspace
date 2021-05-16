@@ -136,4 +136,4 @@ def assess_and_classify_image_quality(page_name):
     classify_image_quality(screenshotted_image, image_name)
 
 
-assess_and_classify_image_quality('./screenshots/pre_defined_screenshots/landing_page.png')
+assess_and_classify_image_quality('landing_page')

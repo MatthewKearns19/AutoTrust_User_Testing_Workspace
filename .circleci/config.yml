@@ -25,6 +25,8 @@ jobs:
       - run: python3 -m venv env
       - run: . env/bin/activate
       - run: python3 -m pip install --upgrade pip
+      - run: pip install libcudart.so.11.0
+      - run: pip install libcuda.so.1
       - restore_cache:
           key: -v3-requirements-{{ checksum "requirements.txt" }}
       - run: pip install -r requirements.txt

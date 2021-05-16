@@ -136,5 +136,4 @@ def assess_and_classify_image_quality(page_name):
     classify_image_quality(screenshotted_image, image_name)
 
 
-pre_defined_screenshot = os.path.join('./screenshots/pre_defined_screenshots/landing_page' + png_file_extension)
-assess_and_classify_image_quality(pre_defined_screenshot)
+assess_and_classify_image_quality('./screenshots/pre_defined_screenshots/landing_page.png')

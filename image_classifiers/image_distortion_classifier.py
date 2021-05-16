@@ -13,10 +13,10 @@ import matplotlib.pyplot as plt
 from tensorflow.keras.applications.vgg16 import preprocess_input
 from sklearn.metrics import confusion_matrix
 
-from variables.app_variables import image_quality_distortion_model_path, \
-    confusion_matrix_assessment_path, png_file_extension, \
-    confusion_matrix_output_path, matrix_extension, assessment_high_resolution_assessment_path, artifacts_path, \
-    screenshot_results_path
+# from variables.app_variables import image_quality_distortion_model_path, \
+#     confusion_matrix_assessment_path, png_file_extension, \
+#     confusion_matrix_output_path, matrix_extension, assessment_high_resolution_assessment_path, artifacts_path, \
+#     screenshot_results_path
 
 # loading the Image Quality Classifier
 model = load_model(image_quality_distortion_model_path)

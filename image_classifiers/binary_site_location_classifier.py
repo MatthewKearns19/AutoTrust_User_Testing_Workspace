@@ -8,9 +8,9 @@ from skimage.metrics import structural_similarity
 import imutils
 import time
 
-
-from variables.app_variables import screenshot_results_path, png_file_extension, \
-	failed_comparisons_path, pre_defined_screenshot_path, failed_file_extension, artifacts_path
+#
+# from variables.app_variables import screenshot_results_path, png_file_extension, \
+# 	failed_comparisons_path, pre_defined_screenshot_path, failed_file_extension, artifacts_path
 
 
 chrome_executable_path = '/usr/local/bin/chromedriver.exech'

@@ -32,8 +32,8 @@ jobs:
           key: -v3-requirements-{{ checksum "requirements.txt" }}
           paths:
             - "env"
-      - run: root/image_classifiers/binary_site_location_classifier.py
-      - run: root/image_classifiers/image_distortion_classifer.py
+      - run: python3 image_classifiers/binary_site_location_classifier.py
+      - run: python3 image_classifiers/image_distortion_classifer.py
 
       - store_artifacts:
           path: root/AutoTrust_User_Testing_Workspace/artifacts

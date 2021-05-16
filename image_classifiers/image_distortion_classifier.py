@@ -118,8 +118,12 @@ def classify_image_quality(screenshotted_image_path, image_name):
             "classified instead of 'high resolution'".format(image_name, final_prediction)
 
 
-def assess_and_classify_image_quality(context, page_name):
+def assess_and_classify_image_quality(page_name):
     image_name = page_name
     screenshotted_image = os.path.join(screenshot_results_path, image_name + png_file_extension)
     # assess the image that was screenshotted from the browser
     classify_image_quality(screenshotted_image, image_name)
+
+
+pre_defined_screenshot = os.path.join('./screenshots/pre_defined_screenshots/landing_page' + png_file_extension)
+assess_and_classify_image_quality(pre_defined_screenshot)

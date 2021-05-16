@@ -13,7 +13,7 @@ from variables.app_variables import screenshot_results_path, png_file_extension,
 	failed_comparisons_path, pre_defined_screenshot_path, failed_file_extension, artifacts_path
 
 
-def compare_page_location_similarity(context, image_name):
+def compare_page_location_similarity(image_name):
 	test_failed = False
 
 	# temporarily using a distorted pre-defined screenshot to compare against the captured
@@ -75,3 +75,7 @@ def compare_page_location_similarity(context, image_name):
 			"The captured image labeled '{}' in your pre-defined images has failed " \
 			"image quality assessment. The binary image pixels do not match," \
 			"an element on your site must not be visible.'".format(image_name)
+
+
+pre_defined_screenshot = os.path.join(pre_defined_screenshot_path, 'landing_page' + png_file_extension)
+compare_page_location_similarity(pre_defined_screenshot)

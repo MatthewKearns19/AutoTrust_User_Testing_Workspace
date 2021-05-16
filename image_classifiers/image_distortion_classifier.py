@@ -17,12 +17,6 @@ from sklearn.metrics import confusion_matrix
 #     confusion_matrix_assessment_path, png_file_extension, \
 #     confusion_matrix_output_path, matrix_extension, assessment_high_resolution_assessment_path, artifacts_path, \
 #     screenshot_results_path
-
-# loading the Image Quality Classifier
-model = load_model(image_quality_distortion_model_path)
-time.sleep(10)
-
-
 chrome_executable_path = '/usr/local/bin/chromedriver.exech'
 pre_defined_screenshot_path = './screenshots/pre_defined_screenshots/'
 screenshot_results_path = './screenshots/browser_screenshot_outputs/'
@@ -35,6 +29,9 @@ assessment_high_resolution_assessment_path = './confusion_matrix_assessment/mode
 confusion_matrix_output_path = './confusion_matrix_assessment/confusion_matrix_output/'
 matrix_extension = '_confusion_matrix.png'
 artifacts_path = './artifacts/'
+# loading the Image Quality Classifier
+model = load_model(image_quality_distortion_model_path)
+time.sleep(10)
 
 
 def plot_and_save_confusion_matrix(image_name, cm,

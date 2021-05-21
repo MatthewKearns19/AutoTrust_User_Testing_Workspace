@@ -3,7 +3,7 @@
 # chrome path for for circle-ci
 #chrome_executable_path = '/usr/local/bin'
 # chrome path for for circle-ci
-chrome_executable_path = '/usr/local/bin/chromedriver'
+chrome_executable_path = '/usr/bin/chromedriver'
 pre_defined_screenshot_path = './screenshots/pre_defined_screenshots/'
 screenshot_results_path = './screenshots/browser_screenshot_outputs/'
 failed_comparisons_path = './screenshots/failed_comparisons/'

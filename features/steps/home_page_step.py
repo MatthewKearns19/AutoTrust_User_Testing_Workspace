@@ -1,10 +1,10 @@
 import os
-
+from selenium.webdriver import ActionChains
 from behave import *
 from functions.main_functions_flow import find_element_by_xpath, screenshot
 from image_classifiers.binary_site_location_classifier import compare_page_location_similarity
 from image_classifiers.image_distortion_classifier import assess_and_classify_image_quality
-from variables.browser_elements import welcome_element
+from variables.browser_elements import welcome_element, slides_xpath
 from functions.main_functions_flow import execute_homepage_navigation
 import time
 
@@ -60,17 +60,31 @@ def compare_chosen_page_location_image(context, screenshotted_page_location):
     compare_page_location_similarity(context, page_name)
 
 
-@step("the the location contains an image so assess the image quality (?P<screenshotted_page_location>.+)")
-def assess_chosen_page_location_image_quality(context, screenshotted_page_location):
+@step("the the location contains an image so assess the image quality (?P<screenshotted_image_location>.+)")
+def assess_chosen_page_location_image_quality(context, screenshotted_image_location):
     """
         Description: uses the same screenshot of the page location captured in the last step, by defining the
         same pre-defined screenshot name, allowing the assess_and_classify_image_quality() to locate this image
         again in the browser_screenshot_outputs folder. Image Distortion Classification is then assessed.
-        :param screenshotted_page_location: specified page location, passed to assess_and_classify_image_quality()
+        :param screenshotted_image_location: specified page location, passed to assess_and_classify_image_quality()
         function the name of the pre-defined screenshot that is to be used in comparison.
         :return: fail or pass if the assess_and_classify_image_quality() function fails or passes image comparison.
     """
-    page_name = screenshotted_page_location
+    page_name = screenshotted_image_location
     screenshot(context, page_name)
     time.sleep(3)
     assess_and_classify_image_quality(context, page_name)
+
+
+@step("the user navigates to the image slides")
+def navigate_to_image_slides_on_homepage(context):
+    """
+        Description: navigates the browser view to image the image slides
+        :type context: behave.runner.Context
+        :type page_location: str
+    """
+    slide_image = find_element_by_xpath(context, slides_xpath)
+    time.sleep(1)
+    imitate_user_action = ActionChains(context.browser)
+    imitate_user_action.move_to_element(slide_image).perform()
+    time.sleep(6)

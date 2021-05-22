@@ -17,8 +17,10 @@ def find_element_by_xpath(context, element):
 
 
 def screenshot(context, page_name):
+    time.sleep(1)
     path_to_save_screenshot = os.path.join(screenshot_results_path, page_name + png_file_extension)
     context.browser.save_screenshot(path_to_save_screenshot)
+    time.sleep(1)
 
 
 def execute_homepage_navigation(context, homepage_url):

@@ -37,14 +37,14 @@ def compare_page_location_similarity(context, image_name):
 	if ssim_score < 1.0:
 		print("Browser element comparison Similarity Score: {}% image accuracy. "
 			  "Similarity is not 1:1.".format(ssim_score_percentage))
-		test_failed = False
+		test_failed = True
 		# diff is represented as a floating point data type in the range [0,1]
 		# as it was returned from compare_ssim, so we must convert the array to
 		# 8-bit unsigned integers in the range [0,255] before we can use it with cv2
 		image_diff = (diff * 255).astype("uint8")
 
-		# threshold the difference image, followed by finding contours to obtain the regions
-		# of the two input images that differ by comparing the difference
+		# threshold each image difference, followed by finding contours to obtain the regions
+		# of the two input images that differ by comparing the differences
 		threshold = cv2.threshold(image_diff, 0, 255, cv2.THRESH_BINARY_INV | cv2.THRESH_OTSU)[1]
 		contours = cv2.findContours(threshold.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 		contours = imutils.grab_contours(contours)

@@ -9,6 +9,7 @@ def before_all(context):
     options = webdriver.ChromeOptions()
     options.add_argument("--test-type")
     options.add_argument("--headless")
+    options.binary_location = "/usr/bin/google-chrome"
 
     # context.browser = webdriver.Chrome(chrome_executable_path, port=9515, options=options,
     #                                    keep_alive=False)

@@ -71,6 +71,6 @@ def assess_chosen_page_location_image_quality(context, screenshotted_page_locati
         :return: fail or pass if the assess_and_classify_image_quality() function fails or passes image comparison.
     """
     page_name = screenshotted_page_location
-    #screenshot(context, page_name)
+    screenshot(context, page_name)
     time.sleep(3)
     assess_and_classify_image_quality(context, page_name)

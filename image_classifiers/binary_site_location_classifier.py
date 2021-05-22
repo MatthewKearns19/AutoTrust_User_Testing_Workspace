@@ -31,12 +31,12 @@ def compare_page_location_similarity(context, image_name):
 	# Structural Similarity Index (SSIM)
 	# use structural_similarity instead of compare_ssim for skimage==0.18.1
 	(ssim_score, diff) = structural_similarity(image1_grayscale, image2_grayscale, full=True)
-	ssim_score_percentage = ssim_score * 1
-	print("Browser element comparison Similarity Score: {}% image accuracy. "
-		  "Similarity score is not 100%.".format(ssim_score_percentage))
+	ssim_score_percentage = ssim_score * 100
 
 	# if the similarity ratio is less that 1:1
 	if ssim_score < 1.0:
+		print("Browser element comparison Similarity Score: {}% image accuracy. "
+			  "Similarity is not 1:1.".format(ssim_score_percentage))
 		test_failed = False
 		# diff is represented as a floating point data type in the range [0,1]
 		# as it was returned from compare_ssim, so we must convert the array to
@@ -63,6 +63,9 @@ def compare_page_location_similarity(context, image_name):
 		failed_image_path = os.path.join(failed_comparisons_path, image_name + failed_file_extension)
 		cv2.imwrite(failed_image_path, image2)
 		time.sleep(1)
+	else:
+		print("Browser element comparison Similarity Score: {}% image accuracy. "
+			  "Similarity is 1:1.".format(ssim_score_percentage))
 
 	if test_failed:
 		failed_comparison_to_artifacts_path = artifacts_path + image_name + failed_file_extension

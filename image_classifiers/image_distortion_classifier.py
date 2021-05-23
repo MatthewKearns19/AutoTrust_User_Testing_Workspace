@@ -10,6 +10,7 @@ from tensorflow.keras.preprocessing import image as im
 import itertools
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
+import cv2
 
 from variables.app_variables import image_quality_distortion_model_path, \
     png_file_extension, confusion_matrix_output_path, matrix_extension, \
@@ -105,6 +106,9 @@ def classify_image_quality(screenshotted_image_path, image_name):
 
         create_confusion_matrix(image_name, max_prediction_location)
 
+    image_to_store_in_artifacts = cv2.imread(screenshotted_image_path)
+    cv2.imwrite(artifacts_path, image_to_store_in_artifacts)
+
     # if the image is not high resolution then fail the test
     if final_prediction != 'high resolution':
 
@@ -115,6 +119,7 @@ def classify_image_quality(screenshotted_image_path, image_name):
 
 
 def assess_and_classify_image_quality(context, page_name):
+    # using the name of the page location given, we can locate the corresponding browser screenshot output
     image_name = page_name
     screenshotted_image = os.path.join(screenshot_results_path, image_name + png_file_extension)
     # assess the image that was screenshotted from the browser

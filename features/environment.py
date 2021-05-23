@@ -1,7 +1,7 @@
 # this is our environment file to work with our environment executables
 from selenium import webdriver
 from variables.app_variables import chrome_executable_path, screenshot_results_path, \
-    failed_comparisons_path, artifacts_path
+    failed_comparisons_path, artifacts_path, confusion_matrix_output_path
 import os
 import time
 

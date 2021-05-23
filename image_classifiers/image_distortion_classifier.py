@@ -42,13 +42,13 @@ def plot_and_save_confusion_matrix(image_name, cm,
     plt.ylabel('True label for each feature class')
     plt.xlabel('Predicted label of image quality/distortion\n')
 
-    path_to_save_matrix_plot = confusion_matrix_output_path + image_name + matrix_extension
-    print('For local testing, saving matrix at the location: ' + path_to_save_matrix_plot)
+    #path_to_save_matrix_plot = confusion_matrix_output_path + image_name + matrix_extension
+    #print('For local testing, saving matrix at the location: ' + path_to_save_matrix_plot)
 
     confusion_matrix_artifacts_path = artifacts_path + image_name + matrix_extension
     print('For CI/DC server integration, saving matrix at the location: ' + confusion_matrix_artifacts_path)
 
-    plt.savefig(path_to_save_matrix_plot)
+    #plt.savefig(path_to_save_matrix_plot)
     plt.savefig(confusion_matrix_artifacts_path)
 
 

@@ -106,9 +106,6 @@ def classify_image_quality(screenshotted_image_path, image_name):
 
         create_confusion_matrix(image_name, max_prediction_location)
 
-    image_to_store_in_artifacts = cv2.imread(screenshotted_image_path)
-    cv2.imwrite(artifacts_path, image_to_store_in_artifacts)
-
     # if the image is not high resolution then fail the test
     if final_prediction != 'high resolution':
 

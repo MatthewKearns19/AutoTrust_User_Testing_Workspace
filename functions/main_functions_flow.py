@@ -21,7 +21,7 @@ def screenshot(context, page_name):
     path_to_save_screenshot = os.path.join(screenshot_results_path, page_name + png_file_extension)
     context.browser.save_screenshot(path_to_save_screenshot)
     time.sleep(1)
-    context.browser.save_screenshot('./artifacts/')
+    context.browser.save_screenshot('./artifacts/' + str(page_name) + '.png')
     time.sleep(1)
 
 

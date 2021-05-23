@@ -11,4 +11,4 @@ Feature:Home page navigation feature
     Examples:
     #This is calling our hosted url
     | homepage_url                                                 | heading_text                                                 | screenshotted_page_location | screenshotted_image_location |
-    | https://auto-trust-user-workspace-staging-demo.netlify.app/  | Welcome to Auto-Trust, a visual testing automation framework.| landing_page_local_testing  | first_image_in_slides        |
+    | https://auto-trust-user-workspace-staging-demo.netlify.app/  | Welcome to Auto-Trust, a visual testing automation framework.| landing_page                | first_image_in_slides        |

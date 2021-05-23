@@ -4,9 +4,9 @@ Feature:Home page navigation feature
     When The user navigates to the <homepage_url>
     Then the user can see the <heading_text>
     And the user visually compares the <screenshotted_page_location>
-    #And the user navigates to the image slides
+    And the user navigates to the image slides
     #And the user visually compares the <screenshotted_page_location>
-    #And the the location contains an image so assess the image quality <screenshotted_image_location>
+    And the the location contains an image so assess the image quality <screenshotted_image_location>
 
     Examples:
     #This is calling our hosted url

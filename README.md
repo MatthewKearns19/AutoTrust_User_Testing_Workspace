@@ -80,6 +80,7 @@ Before executing the tests, ensure you have met the following requirements:
 * For local testing install `<chromedriver>` to your local machine.
 
   Windows:
+  
   find versions here https://sites.google.com/a/chromium.org/chromedriver/downloads
   (if you do not already have `<Chrome>` which `<chromedriver>` replies upon,
     you can download it here: https://www.google.com/chrome/). Change the

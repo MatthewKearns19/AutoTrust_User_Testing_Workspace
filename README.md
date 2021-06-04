@@ -25,11 +25,12 @@ Before executing the tests, ensure you have met the following requirements:
 * More info on Selenium with behave -
   https://www.blazemeter.com/blog/using-the-behave-framework-for-selenium-bdd-testing-a-tutorial
 * Get the code from this repository to your local machine.
-* A GPU is not needed but improves accuracy for the
+* A GPU is not needed but improves accuracy for the CNN.
 * A virtual environment is recommended, if you have not installed `<Python>` or
   Python's `<virtualenv>` then:
 
   Windows:
+
   Download Python at and follow instructions to set
   your python path: https://www.python.org/downloads/
   ```
@@ -77,6 +78,7 @@ Before executing the tests, ensure you have met the following requirements:
   ```
 
 * For local testing install `<chromedriver>` to your local machine.
+
   Windows:
   find versions here https://sites.google.com/a/chromium.org/chromedriver/downloads
   (if you do not already have `<Chrome>` which `<chromedriver>` replies upon,
@@ -126,11 +128,36 @@ Before executing the tests, ensure you have met the following requirements:
   `<Ubuntu>` image on a virtual machine such as `<VirtualBox>`,
   see: https://itsfoss.com/install-linux-in-virtualbox/).
 
-  On Jenkins setup, when prompted with installations, accept these. Then go to
-  Manage Jenkins > Install Plugins and install the `<GitHub Plugin>`. Read this
+  On `<Jenkins>` setup, when prompted with installations, accept these. Then go to
+  `<Manage Jenkins>` > `<Install Plugins>` and install the `<GitHub Plugin>`. Read this
   guide to get a better understanding of setting up a Jenkins
   `<Freestyle Project>`-
   https://www.techrepublic.com/article/how-to-create-a-new-build-job-in-jenkins/
+
+  Integration between Jenkins and Github is achieves via Github `<Webhooks>`,
+  for which you will need `<ssh-keys>` and a public domain. For `<ssh-keys>`
+  see the following link:
+
+  And for a public domain you can use `<ngrok>` found at https://ngrok.com/ to
+  port-tunnell your local server providing a public domain se the https domain
+  provided for added security). Once `<ngrok>` is installed, as the login
+  homepage suggests, run the following commands to forward your local server:
+
+  Windows (make sure you are in the installed `<ngrok>` Windows application):
+  ```
+  .\ngrok authtoken <enter your auththoken here>
+  # jenkins runs on 8080 my default.
+  .\ngrok http 8080
+  ```
+
+  Linux (make sure you are in the directory of the unzipped installation):
+  ```
+  .\ngrok authtoken <enter your auththoken here>
+  # jenkins runs on 8080 my default.
+  .\ngrok http 8080
+  ```
+  When the above is complete, see this link for configuring the
+  `<Webhooks>` https://www.blazemeter.com/blog/how-to-integrate-your-github-repository-to-your-jenkins-project
 
   You can take the approach of setting one `<Freestyle Project>` up for your
   application workspace repository, and another for your testing repository. Set
@@ -155,7 +182,7 @@ Before executing the tests, ensure you have met the following requirements:
   Linux (make sure the `<Build Step>` is `<Execute Shell>`):
   ```
   #!/bin/bash
-    set -e
+  set -e
   python3 -m virtualenv env
   source env\Scripts\activate
   pip 3 install --upgrade pip
@@ -170,7 +197,7 @@ Before executing the tests, ensure you have met the following requirements:
 
   Make sure you have specified the correct `<chromedriver>` path in the
   `<variables.py>` to match where you have specified chromedriver as a Jenkins
-  environment variable. For example on local Jenkins, you can define the path to
+  environment variable. For example, on local Jenkins you can define the path to
   your local chromedriver installation as a Jenkins environment variable.
   Of course Windows chromedriver path will be different to Linux as mentioned
   previously. Additionally, you do not have to use chromdriver, you can research
